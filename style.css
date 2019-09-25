@@ -1,0 +1,12 @@
+a,
+a:hover {
+  text-decoration: none;
+}
+
+.no-underline li {
+  border: none;
+}
+
+.list-font-lg {
+  font-size: 1.2rem;
+}
