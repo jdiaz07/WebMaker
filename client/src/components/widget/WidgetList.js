@@ -86,6 +86,7 @@ export default function WidgetList() {
             </div>
             <div className="embed-responsive embed-responsive-16by9">
               <iframe
+                title="video"
                 width={560}
                 height={315}
                 src="https://www.youtube.com/embed/UW3mc3fH94Y"

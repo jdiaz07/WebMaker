@@ -41,7 +41,7 @@ export default function Register(props) {
     <div className="container mt-5">
       <h1 className="text-primary">Register</h1>
       <p>It's free and only takes a minute!</p>
-      <form>
+      <form onSubmit={register}>
         <div className="form-group">
           <label htmlFor="first-name">First Name</label>
           <input className="form-control" placeholder="Enter first name..." />
@@ -93,11 +93,11 @@ export default function Register(props) {
         <br />
         <p className="bottom-text">
           By clicking the Submit button, you agree to our{" "}
-          <a href="#">Terms &amp; Conditions</a> and{" "}
-          <a href="#">Privacy Policy</a>
+          <Link to="#">Terms &amp; Conditions</Link> and{" "}
+          <Link to="#">Privacy Policy</Link>
         </p>
         <p>
-          Already have an account? <a href="login.html">Login Here</a>
+          Already have an account? <Link to="/login">Login Here</Link>
         </p>
         <p className="fixed-bottom container text-center">TRENCHES © 2020</p>
       </form>
