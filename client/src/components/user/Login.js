@@ -13,6 +13,7 @@ export default function Login(props) {
     const res = await axios.get(
       `/api/user?username=${username}&password=${password}`
     );
+    const user = res.data;
 
     if (user) {
       history.push(`/user.${user._id}`);
