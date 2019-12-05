@@ -15,7 +15,7 @@ export default function Login(props) {
     );
 
     if (user) {
-      history.push(`/user.${user / _id}`);
+      history.push(`/user.${user._id}`);
     } else {
       alert("Invalid Credential");
     }
