@@ -12,7 +12,7 @@ export default function Profile(props) {
   const params = useParams();
 
   const getUser = async () => {
-    const user = await axios.get(`/api/user/${params.uid}`);
+    const res = await axios.get(`/api/user/${params.uid}`);
     const user = res.data;
     setUsername(user.username);
     setEmail(user.email);
