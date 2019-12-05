@@ -10,7 +10,7 @@ export default function Register(props) {
 
   const history = useHistory();
 
-  const register = e => {
+  const register = async e => {
     e.preventDefault();
     // Check if passwords match
     if (password !== password2) {
@@ -18,8 +18,8 @@ export default function Register(props) {
       return;
     }
     // Check if user name is taken
-    const res = await axios.get(`/api/user?username=${username}`) 
-    if(res.data) {
+    const res = await axios.get(`/api/user?username=${username}`);
+    if (res.data) {
       alert("Username is taken, try another one");
       return;
     }
@@ -38,11 +38,11 @@ export default function Register(props) {
       lastName: "",
       email: ""
     };
-    await axios.post("/api/user", newUser)
+    await axios.post("/api/user", newUser);
     // Navigate user into his profile
     history.push(`/user/${newUser._id}`);
   };
- 
+
   return (
     <div className="container mt-5">
       <h1 className="text-primary">Register</h1>
