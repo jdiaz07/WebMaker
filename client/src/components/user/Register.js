@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import uuid from "uuid";
+import axios from "axios";
 
 export default function Register(props) {
   const [username, setUsername] = useState("");
@@ -17,6 +18,11 @@ export default function Register(props) {
       return;
     }
     // Check if user name is taken
+    const res = await axios.get(`/api/user?username=${username}`) 
+    if(res.data) {
+      alert("Username is taken, try another one");
+      return;
+    }
     for (let user of props.users) {
       if (user.username === username) {
         alert("Username is taken, please try another one.");
@@ -32,11 +38,11 @@ export default function Register(props) {
       lastName: "",
       email: ""
     };
-    props.addUser(newUser);
+    await axios.post("/api/user", newUser)
     // Navigate user into his profile
     history.push(`/user/${newUser._id}`);
   };
-
+ 
   return (
     <div className="container mt-5">
       <h1 className="text-primary">Register</h1>
