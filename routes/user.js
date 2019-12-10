@@ -46,7 +46,7 @@ router.get("/", (req, res) => {
   if (username && password) {
     for (let i = 0; i < users.length; i++) {
       // If we find a user with given username and password
-      if (users[i].username === username && user[i].password === password) {
+      if (users[i].username === username && users[i].password === password) {
         user = users[i];
       }
     }
@@ -63,7 +63,7 @@ router.get("/", (req, res) => {
     user = null;
   }
   // Send user back to client
-  res.jason(user);
+  res.json(user);
 });
 
 // Create new user
