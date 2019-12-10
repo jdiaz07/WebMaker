@@ -13,7 +13,7 @@ export default function PageList(props) {
   }, []);
 
   const getPages = async () => {
-    const res = await axios.get(`/api/pages/website/${params.wid}`);
+    const res = await axios.get(`/api/page/website/${params.wid}`);
     setPages(res.data);
   };
 
@@ -47,15 +47,6 @@ export default function PageList(props) {
               </Link>
             </li>
           ))}
-          <li className="list-group-item">
-            <Link to="/user/:uid/website/:wid/page/:pid/widget">Blog Post</Link>
-            <Link
-              className="float-right"
-              to="/user/:uid/website/:wid/page/:pid"
-            >
-              <i className="fas fa-cog" />
-            </Link>
-          </li>
         </ul>
         <footer className="navbar navbar-light bg-light fixed-bottom">
           <span className="mb-0">

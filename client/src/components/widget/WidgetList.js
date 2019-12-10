@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function WidgetList(props) {
   const params = useParams();
@@ -7,8 +8,14 @@ export default function WidgetList(props) {
   const [widgets, setWidgets] = useState([]);
 
   useEffect(() => {
-    setWidgets(props.getWidgets(params.pid));
-  }, [props, params.pid]);
+    getWidgets();
+    // eslint-disable-next-line
+  }, []);
+
+  const getWidgets = async () => {
+    const res = await axios.get(`/api/widget/page/${params.pid}`);
+    setWidgets(res.data);
+  };
 
   return (
     <div>
@@ -22,7 +29,7 @@ export default function WidgetList(props) {
           </span>
         </div>
         <Link
-          to={`/user/${params.uid}/website/${params.wid}/page/${params.wid}/widget/new`}
+          to={`/user/${params.uid}/website/${params.wid}/page/${params.pid}/widget/new`}
         >
           <i className="fas fa-plus text-dark" />
         </Link>
@@ -30,9 +37,9 @@ export default function WidgetList(props) {
       <main className="container-fluid">
         {widgets.map(widget => (
           <section key={widget._id}>
-            <div className="position-absolute absolute-right p-1 bg-light rounded-left">
+            <div className="position-absolute front absolute-right p-1 bg-light rounded-left">
               <Link
-                to={`/user/${params.uid}.website/${params.wid}/page/${params.pid}/widget/${widget._id}`}
+                to={`/user/${params.uid}/website/${params.wid}/page/${params.pid}/widget/${widget._id}`}
               >
                 <i className="fas fa-cog" />
               </Link>
@@ -40,12 +47,12 @@ export default function WidgetList(props) {
             </div>
             {widget.widgetType === "HEADING" && (
               <div>
-                {widget.size === 1 && <h1>{widget.text}</h1>}
-                {widget.size === 2 && <h2>{widget.text}</h2>}
-                {widget.size === 3 && <h3>{widget.text}</h3>}
-                {widget.size === 4 && <h4>{widget.text}</h4>}
-                {widget.size === 5 && <h5>{widget.text}</h5>}
-                {widget.size === 6 && <h6>{widget.text}</h6>}
+                {widget.size === "1" && <h1>{widget.text}</h1>}
+                {widget.size === "2" && <h2>{widget.text}</h2>}
+                {widget.size === "3" && <h3>{widget.text}</h3>}
+                {widget.size === "4" && <h4>{widget.text}</h4>}
+                {widget.size === "5" && <h5>{widget.text}</h5>}
+                {widget.size === "6" && <h6>{widget.text}</h6>}
               </div>
             )}
             {widget.widgetType === "IMAGE" && (

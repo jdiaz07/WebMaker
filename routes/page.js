@@ -4,7 +4,8 @@ const router = express.Router();
 const pages = [
   { _id: "321", name: "Post 1", websiteId: "456", title: "Lorem" },
   { _id: "432", name: "Post 2", websiteId: "456", title: "Lorem" },
-  { _id: "543", name: "Post 3", websiteId: "456", title: "Lorem" }
+  { _id: "543", name: "Post 3", websiteId: "456", title: "Lorem" },
+  { _id: "654", name: "Post 4", websiteId: "890", title: "Lorem" }
 ];
 
 // Create new page

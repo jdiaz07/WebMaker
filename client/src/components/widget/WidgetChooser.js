@@ -1,12 +1,13 @@
 import React from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import uuid from "uuid";
+import axios from "axios";
 
 export default function WidgetChooser(props) {
   const params = useParams();
   const history = useHistory();
 
-  const create = type => {
+  const create = async type => {
     // Create new widget variable
     const newWidget = {
       _id: uuid.v4(),
@@ -14,7 +15,7 @@ export default function WidgetChooser(props) {
       pageId: params.pid
     };
     // Add new widget into widgets array
-    props.addWidget(newWidget);
+    await axios.post("/api/widget", newWidget);
     // Navigate to widget edit page
     history.push(
       `/user/${params.uid}/website/${params.wid}/page/${params.pid}/widget/${newWidget._id}`
@@ -38,7 +39,7 @@ export default function WidgetChooser(props) {
       <div className="container">
         <ul className="list-group list-group-flush no-underline list-font-lg">
           <li className="list-group-item">
-            <button onClick={create.bind(this, "HEADING")} className="btn">
+            <button className="btn" onClick={create.bind(this, "HEADING")}>
               Header
             </button>
           </li>
@@ -58,14 +59,14 @@ export default function WidgetChooser(props) {
             <Link to="#">Button</Link>
           </li>
           <li className="list-group-item">
-            <Link to="/user/:uid/website/:wid/page/:pid/widget/:wgid">
+            <button onClick={create.bind(this, "IMAGE")} className="btn">
               Image
-            </Link>
+            </button>
           </li>
           <li className="list-group-item">
-            <Link to="/user/:uid/website/:wid/page/:pid/widget/:wgid">
+            <button onClick={create.bind(this, "YOUTUBE")} className="btn">
               Youtube
-            </Link>
+            </button>
           </li>
           <li className="list-group-item">
             <Link to="#">Data Table</Link>

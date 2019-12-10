@@ -35,7 +35,7 @@ router.get("/:wid", (req, res) => {
   const wid = req.params.wid;
   let website = null;
   for (let i = 0; i < websites.length; i++) {
-    if (users[i]._id === wid) {
+    if (websites[i]._id === wid) {
       website = websites[i];
     }
   }

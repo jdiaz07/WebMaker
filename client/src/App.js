@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // User components
@@ -19,82 +19,6 @@ import WidgetChooser from "./components/widget/WidgetChooser";
 import WidgetEdit from "./components/widget/WidgetEdit";
 
 function App() {
-  const [widgets, setWidgets] = useState([
-    {
-      _id: "123",
-      widgetType: "HEADING",
-      pageId: "321",
-      size: "2",
-      text: "GIZMODO"
-    },
-    {
-      _id: "234",
-      widgetType: "HEADING",
-      pageId: "321",
-      size: "4",
-      text: "Lorem ipsum"
-    },
-    {
-      _id: "345",
-      widgetType: "IMAGE",
-      pageId: "321",
-      width: "100%",
-      url:
-        "https://www.thoughtco.com/thmb/8qvtjPU97u4bwsoPxws6H-r9NoY=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/black-wolf-approaches-a-photographer-hudson-bay-949087536-5c44f0fa46e0fb000191455b.jpg"
-    },
-    {
-      _id: "567",
-      widgetType: "HEADING",
-      pageId: "321",
-      size: "4",
-      text: "Lorem ipsum"
-    },
-    {
-      _id: "678",
-      widgetType: "YOUTUBE",
-      pageId: "321",
-      width: "100%",
-      url: "https://www.youtube.com/embed/UW3mc3fH94Y"
-    }
-  ]);
-
-  // Get widgets by page id
-  const getWidgets = pid => {
-    return widgets.filter(widget => widget.pageId === pid);
-  };
-
-  // Get Widget by widget id
-  const getWidget = wgid => {
-    for (let widget of widgets) {
-      if (widget._id === wgid) {
-        return widget;
-      }
-    }
-  };
-
-  // add Widget
-  const addWidget = newWidget => {
-    setWidgets([...widgets, newWidget]);
-  };
-
-  // remove Widget
-  const removeWidget = wgid => {
-    setWidgets(widgets.filter(widget => widget._id !== wgid));
-  };
-
-  // update Widget
-  const updateWidget = newWidget => {
-    setWidgets(
-      widgets.map(widget => {
-        if (widget._id === newWidget._id) {
-          return newWidget;
-        } else {
-          return widget;
-        }
-      })
-    );
-  };
-
   return (
     <Router>
       <Switch>
@@ -126,17 +50,13 @@ function App() {
           <PageEdit />
         </Route>
         <Route exact path="/user/:uid/website/:wid/page/:pid/widget">
-          <WidgetList getWidgets={getWidgets} />
+          <WidgetList />
         </Route>
         <Route exact path="/user/:uid/website/:wid/page/:pid/widget/new">
-          <WidgetChooser addWidget={addWidget} />
+          <WidgetChooser />
         </Route>
         <Route exact path="/user/:uid/website/:wid/page/:pid/widget/:wgid">
-          <WidgetEdit
-            getWidget={getWidget}
-            removeWidget={removeWidget}
-            updateWidget={updateWidget}
-          />
+          <WidgetEdit />
         </Route>
         <Route path="/">
           <Login />
